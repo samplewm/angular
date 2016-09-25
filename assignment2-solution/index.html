@@ -1,0 +1,72 @@
+<!doctype html>
+<html ng-app='ShoppingListCheckOff'>
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      .flipemptyMessage {
+        font-weight: bold;
+        color: blue;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <h1>Shopping List Check Off</h1>
+
+    <div class="row">
+
+    <!-- To Buy List -->
+    <div ng-controller="ToBuyShoppingController as buyList">
+        <div class="flipemptyMessage">To Buy!</div>
+
+          <ul>
+            <li ng-repeat="item in buyList.buy">
+              Buy {{item.quantity}} {{item.name}}
+              <button ng-click="buyList.removeItem($index);">Bought</button>
+            </li>
+          </ul>
+
+         <div ng-hide="!buyList.flag" class="emptyMessage">Nothing to buy!</div>
+    </div>
+    <br><br><br>
+    <!-- Already Bought List -->
+
+    <div ng-controller="AlreadyBoughtShoppingController as holdList">
+      <div class="flipemptyMessage">Already Bought!!</div>
+      {{holdList.sz()}}
+	  <div ng-hide="!holdList.flag" class="emptyMessage">Nothing BOUGHT YET!!</div>
+
+     <ul>
+       <li ng-repeat="item in holdList.hold">
+          Bought {{item.quantity}} {{item.name}}
+       </li>
+     </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
